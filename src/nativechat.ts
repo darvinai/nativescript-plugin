@@ -63,7 +63,7 @@ export class NativeChat extends GridLayout {
 
   private updateUrl(): void {
     if (this._chatContext && this._chatContext.botId && this._chatContext.channelId && this._chatContext.token) {
-      let url = `${webchatUrl}/botId=${encodeURIComponent(this._chatContext.botId)}&channelId=${encodeURIComponent(this._chatContext.channelId)}&token=${encodeURIComponent(this._chatContext.token)}`;
+      let url = `${webchatUrl}?botId=${encodeURIComponent(this._chatContext.botId)}&channelId=${encodeURIComponent(this._chatContext.channelId)}&token=${encodeURIComponent(this._chatContext.token)}`;
 
       if (this._chatContext.userMessage != null) {
         url += `&userMessage=${encodeURIComponent(this._chatContext.userMessage)}`;
