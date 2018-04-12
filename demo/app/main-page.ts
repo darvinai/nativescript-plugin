@@ -13,7 +13,14 @@ export function pageLoaded(args: observable.EventData) {
             user: {
                 name: 'John Smith'
             },
-            initConversation: true
+            session: {
+                isNew: true,
+                userMessage: '',
+                context: {
+                    company: 'Progress Software',
+                    phone: '555 555 5555'
+                }
+            }
         }
     });
 

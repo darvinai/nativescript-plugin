@@ -11,14 +11,19 @@ export interface NativeChatConfig {
   channelId: string;
   channelToken: string;
   gtmId?: string;
-  sessionContext?: JSON;
+  session?: Session;
   user?: User;
-  initConversation?: boolean;
 }
 
 export interface User {
   id?: string;
   name?: string;
+}
+
+export interface Session {
+  isNew?: boolean;
+  context?: JSON;
+  userMessage?: string;
 }
 
 export class NativeChat extends GridLayout {
@@ -83,18 +88,20 @@ export class NativeChat extends GridLayout {
         }
       }
 
-      if (this._config.initConversation) {
-        url += `&userMessage=`;
+      if (this._config.session) {
+        if (this._config.session.context) {
+          url += `$context=${encodeURIComponent(JSON.stringify(this._config.session.context))}`;
+        }
+
+        if (this._config.session.isNew || this._config.session.userMessage) {
+          url += `&userMessage=${this._config.session.userMessage || ''}`;
+        }
       }
 
       if (this._config.gtmId != null) {
         url += `&gtmId=${encodeURIComponent(this._config.gtmId)}`;
       }
 
-      if (this._config.sessionContext != null) {
-        url += `$context=${encodeURIComponent(JSON.stringify(this._config.sessionContext))}`;
-      }
-      console.log(url);
       this.webChatConfig.set('url', url);
     } else {
       this.webChatConfig.set('url', '');
