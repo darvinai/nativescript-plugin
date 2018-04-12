@@ -32,8 +32,7 @@ class CustomView extends GridLayout {
                 name: 'John Smith'
             },
             session: {
-                isNew: true,
-                userMessage: '',
+                clear: true,
                 context: {
                     company: 'Progress Software',
                     phone: '555 555 5555'
@@ -72,8 +71,7 @@ export function pageLoaded(args: EventData) {
                 name: 'John Smith'
             },
             session: {
-                isNew: true,
-                userMessage: '',
+                clear: true,
                 context: {
                     company: 'Progress Software',
                     phone: '555 555 5555'
@@ -104,8 +102,7 @@ nativeChat.config = {
         name: 'John Smith'
     },
     session: {
-        isNew: true,
-        userMessage: '',
+        clear: true,
         context: {
             company: 'Progress Software',
             phone: '555 555 5555'
@@ -132,8 +129,7 @@ class CustomView extends GridLayout {
                 name: 'John Smith'
             },
             session: {
-                isNew: true,
-                userMessage: '',
+                clear: true,
                 context: {
                     company: 'Progress Software',
                     phone: '555 555 5555'
@@ -173,9 +169,9 @@ The *config* property should conform to the **NativeChatConfig** interface.
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
-| isNew | boolean | optional | If *true*, the bot will start new conversation with the user. |
+| clear | boolean | optional | If *true*, the bot will start new conversation with the user. |
 | context | JSON | optional | A JSON object containing entities to be merged with the conversation context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
-| userMessage | string | optional | Used to automatically start a conversation with the bot if the user does not have active session. If the message is empty string, the bot will show its introduction message. |
+| userMessage | string | optional | Used to send a message on the user's behalf if the session is cleared. |
 
 ## License
 

@@ -14,8 +14,8 @@ export function pageLoaded(args: observable.EventData) {
                 name: 'John Smith'
             },
             session: {
-                isNew: true,
-                userMessage: '',
+                clear: true,
+                userMessage: 'Book a doctor',
                 context: {
                     company: 'Progress Software',
                     phone: '555 555 5555'
