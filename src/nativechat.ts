@@ -90,7 +90,7 @@ export class NativeChat extends GridLayout {
 
       if (this._config.session) {
         if (this._config.session.context) {
-          url += `$context=${encodeURIComponent(JSON.stringify(this._config.session.context))}`;
+          url += `&context=${encodeURIComponent(JSON.stringify(this._config.session.context))}`;
         }
 
         if (this._config.session.isNew || this._config.session.userMessage) {
