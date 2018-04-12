@@ -22,7 +22,7 @@ export interface User {
 
 export interface Session {
   clear?: boolean;
-  context?: JSON;
+  context?: object;
   userMessage?: string;
 }
 

@@ -1,11 +1,10 @@
-import * as observable from 'tns-core-modules/data/observable';
-import * as pages from 'tns-core-modules/ui/page';
+import { EventData, fromObject } from 'tns-core-modules/data/observable';
 import { NativeChat } from 'ns-nativechat';
+import { Page } from 'tns-core-modules/ui/page';
 
-export function pageLoaded(args: observable.EventData) {
-    let page = <pages.Page>args.object;
 
-    const bindingContext = observable.fromObject({
+export function pageLoaded(args: EventData) {
+    (<Page>args.object).bindingContext = fromObject({
         nativeChatConfig: {
             botId: '5acddd9715e7187c15f3fc28',
             channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
@@ -23,6 +22,4 @@ export function pageLoaded(args: observable.EventData) {
             }
         }
     });
-
-    page.bindingContext = bindingContext;
 }

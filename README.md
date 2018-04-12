@@ -12,83 +12,9 @@ Run the following command from the root of your project:
 tns plugin add ns-nativechat
 ```
 
-## Usage 
+## Usage
 
-In code:
-
-```typescript
-import { NativeChat } from 'ns-nativechat';
-
-class CustomView extends GridLayout {
-    constructor() {
-        super();
-
-        const nativeChat = new NativeChat();
-        nativeChat.config = {
-            botId: '5acddd9715e7187c15f3fc28',
-            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
-            user: {
-                name: 'John Smith'
-            },
-            session: {
-                clear: true,
-                context: {
-                    company: 'Progress Software',
-                    phone: '555 555 5555'
-                }
-            }
-        };
-
-        this.addChild(nativeChat);
-    }
-}
-```
-
-In xml:
-
-```xml
-<Page
-    xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
-    xmlns:ui="ns-nativechat">
-    <ui:NativeChat config="{{ nativeChatConfig }}"/>
-</Page>
-```
-```typescript
-import { Page } from 'tns-core-modules/ui/page';
-import { NativeChat } from 'ns-nativechat';
-import { fromObject, EventData } from 'tns-core-modules/data/observable/observable';
-
-export function pageLoaded(args: EventData) {
-    let page = <Page>args.object;
-
-    const bindingContext = fromObject({
-        nativeChatConfig: {
-            botId: '5acddd9715e7187c15f3fc28',
-            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
-            user: {
-                name: 'John Smith'
-            },
-            session: {
-                clear: true,
-                context: {
-                    company: 'Progress Software',
-                    phone: '555 555 5555'
-                }
-            }
-        }  
-    });
-
-    page.bindingContext = bindingContext;
-}
-```
-
-## API
-
-### requiring / importing the plugin
-
-#### JavaScript
+### JavaSdript
 
 ```javascript
 var NativeChatPlugin = require('ns-nativechat');
@@ -111,17 +37,55 @@ nativeChat.config = {
 };
 ```
 
-#### TypeScript
+### TypeScript
+
+In code:
 
 ```typescript
+import { EventData } from 'tns-core-modules/data/observable';
 import { NativeChat } from 'ns-nativechat';
+import { Page } from 'tns-core-modules/ui/page';
 
-class CustomView extends GridLayout {
-    constructor() {
-        super();
+export function pageLoaded(args: EventData) {
+    const chat = new NativeChat();
+    (<Page>args.object).content = chat;
+    chat.config = {
+        botId: '5acddd9715e7187c15f3fc28',
+        channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+        channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+        user: {
+            name: 'John Smith'
+        },
+        session: {
+            clear: true,
+            userMessage: 'Book a doctor',
+            context: {
+                company: 'Progress Software',
+                phone: '555 555 5555'
+            }
+        }
+    };
+}
+```
 
-        const nativeChat = new NativeChat();
-        nativeChat.config = {
+In xml:
+
+```xml
+<Page
+    xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
+    xmlns:ui="ns-nativechat">
+    <ui:NativeChat config="{{ nativeChatConfig }}"/>
+</Page>
+```
+```typescript
+import { EventData, fromObject } from 'tns-core-modules/data/observable';
+import { NativeChat } from 'ns-nativechat';
+import { Page } from 'tns-core-modules/ui/page';
+
+
+export function pageLoaded(args: EventData) {
+    (<Page>args.object).bindingContext = fromObject({
+        nativeChatConfig: {
             botId: '5acddd9715e7187c15f3fc28',
             channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
             channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
@@ -130,17 +94,18 @@ class CustomView extends GridLayout {
             },
             session: {
                 clear: true,
+                userMessage: 'Book a doctor',
                 context: {
                     company: 'Progress Software',
                     phone: '555 555 5555'
                 }
             }
-        };
-
-        this.addChild(nativeChat);
-    }
+        }
+    });
 }
 ```
+
+## API
 
 ### config
 
@@ -170,7 +135,7 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
 | clear | boolean | optional | If *true*, the bot will start new conversation with the user. |
-| context | JSON | optional | A JSON object containing entities to be merged with the conversation context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
+| context | object | optional | A JSON object containing entities to be merged with the conversation context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
 | userMessage | string | optional | Used to send a message on the user's behalf if the session is cleared. |
 
 ## License
