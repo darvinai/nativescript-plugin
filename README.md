@@ -31,7 +31,7 @@ class CustomView extends GridLayout {
             user: {
                 name: 'John Smith'
             },
-            context: {
+            sessionContext: {
                 company: 'Progress Software',
                 phone: '555 555 5555'
             },
@@ -68,7 +68,7 @@ export function pageLoaded(args: EventData) {
             user: {
                 name: 'John Smith'
             },
-            context: {
+            sessionContext: {
                 company: 'Progress Software',
                 phone: '555 555 5555'
             },
@@ -97,7 +97,7 @@ nativeChat.config = {
     user: {
         name: 'John Smith'
     },
-    context: {
+    sessionContext: {
         company: 'Progress Software',
         phone: '555 555 5555'
     },
@@ -144,7 +144,7 @@ The config should conform to the **NativeChatConfig** interface.
 | user | [User](#user) | optional | Information about the user. |
 | initConversation | boolean | optional | If *true*, the bot will introduce itself if a new user opens the chat. |
 | gtmId | string | optional | Google Tag Manager ID. Used in combination with the tracking property to track completed conversations. Check [here](https://docs.darvin.ai/docs/1.0/publishing/web/#gtmid-optional) for more information.|
-| context | JSON | optional | A JSON object containing entities to be mapped to the user's context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
+| sessionContext | JSON | optional | A JSON object containing entities to be merged with the conversation context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
     
 #### User
 
