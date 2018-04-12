@@ -10,8 +10,10 @@ export interface INativeChatContext {
   botId: string;
   channelId: string;
   token: string;
+  senderId: string;
   userMessage: string;
   gtmId: string;
+  context: object;
 }
 
 export class NativeChat extends GridLayout {
@@ -71,6 +73,14 @@ export class NativeChat extends GridLayout {
 
       if (this._chatContext.gtmId != null) {
         url += `&gtmId=${encodeURIComponent(this._chatContext.gtmId)}`;
+      }
+
+      if (this._chatContext.context != null) {
+        url += `$context=${encodeURIComponent(JSON.stringify(this._chatContext.context))}`;
+      }
+
+      if (this._chatContext.senderId != null) {
+        url += `$senderId=${encodeURIComponent(this._chatContext.senderId)}`;
       }
 
       this.webchatContext.set('url', url);

@@ -1,7 +1,7 @@
 {
     "name": "ns-nativechat",
     "version": "1.0.0",
-    "description": "Your awesome NativeScript plugin.",
+    "description": "NativeChat plugin for NativeScript",
     "main": "nativechat",
     "typings": "index.d.ts",
     "nativescript": {
@@ -34,14 +34,13 @@
         "iOS"
     ],
     "author": {
-        "name": "Your Name",
-        "email": "youremail@yourdomain.com"
+        "name": "Darvin.ai"
     },
     "bugs": {
-        "url": "https://github.com/darvinai/ns-nativechat/issues"
+        "url": "https://github.com/darvinai/nativescript-plugin/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/darvinai/ns-nativechat",
+    "homepage": "https://github.com/darvinai/nativescript-plugin",
     "readmeFilename": "README.md",
     "devDependencies": {
         "tns-core-modules": "^3.1.0",
