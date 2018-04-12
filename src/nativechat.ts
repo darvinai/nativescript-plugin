@@ -6,46 +6,50 @@ import { Observable, fromObject, EventData } from 'tns-core-modules/data/observa
 const builder = require('tns-core-modules/ui/builder');
 const webchatUrl = 'https://webchat.darvin.ai/v1';
 
-export interface INativeChatContext {
+export interface NativeChatConfig {
   botId: string;
   channelId: string;
-  token: string;
-  senderId: string;
-  userMessage: string;
-  gtmId: string;
-  context: object;
+  channelToken: string;
+  gtmId?: string;
+  sessionContext?: JSON;
+  user?: User;
+  initConversation?: boolean;
+}
+
+export interface User {
+  id?: string;
+  name?: string;
 }
 
 export class NativeChat extends GridLayout {
   private _webView: WebView;
-  private _chatContext: INativeChatContext;
+  private _config: NativeChatConfig;
 
-  private webchatContext: Observable;
+  private webChatConfig: Observable;
 
-  set chatContext(value: INativeChatContext) {
-    if (this._chatContext && this._chatContext.constructor.prototype instanceof Observable) {
-      (<any>this._chatContext).off('propertyChange', this.contextPropertyChange.bind(this));
+  set config(value: NativeChatConfig) {
+    if (this._config && this._config.constructor.prototype instanceof Observable) {
+      (<any>this._config).off('propertyChange', this.configPropertyChange.bind(this));
     }
 
-    this._chatContext = value;
-
+    this._config = value;
     this.updateUrl();
 
-    if (this._chatContext && this._chatContext.constructor.prototype instanceof Observable) {
-      (<any>this._chatContext).on('propertyChange', this.contextPropertyChange.bind(this));
+    if (this._config && this._config.constructor.prototype instanceof Observable) {
+      (<any>this._config).on('propertyChange', this.configPropertyChange.bind(this));
     }
   }
 
-  get chatContext(): INativeChatContext {
-    return this._chatContext;
+  get config(): NativeChatConfig {
+    return this._config;
   }
 
   constructor() {
     super();
-    this.webchatContext = fromObject({ url: '' });
+    this.webChatConfig = fromObject({ url: '' });
     this._webView = builder.load(__dirname + '/nativechat.xml') as WebView;
-    this._webView.bindingContext = this.webchatContext;
-    this._webView.on('loadFinished', this.webViewLoaded); // TODO: why can't bind in xml
+    this._webView.bindingContext = this.webChatConfig;
+    this._webView.on('loadFinished', this.webViewLoaded);
 
     this.addChild(this._webView);
   }
@@ -59,33 +63,41 @@ export class NativeChat extends GridLayout {
     }
   }
 
-  private contextPropertyChange(data: EventData): void {
+  private configPropertyChange(data: EventData): void {
     this.updateUrl();
   }
 
   private updateUrl(): void {
-    if (this._chatContext && this._chatContext.botId && this._chatContext.channelId && this._chatContext.token) {
-      let url = `${webchatUrl}?botId=${encodeURIComponent(this._chatContext.botId)}&channelId=${encodeURIComponent(this._chatContext.channelId)}&token=${encodeURIComponent(this._chatContext.token)}`;
+    if (this._config && this._config.botId && this._config.channelId && this._config.channelToken) {
+      let url = `${webchatUrl}?botId=${encodeURIComponent(this._config.botId)}`;
+      url += `&channelId=${encodeURIComponent(this._config.channelId)}`;
+      url += `&token=${encodeURIComponent(this._config.channelToken)}`;
 
-      if (this._chatContext.userMessage != null) {
-        url += `&userMessage=${encodeURIComponent(this._chatContext.userMessage)}`;
+      if (this._config.user) {
+        if (this.config.user.name) {
+          url += `&user=${encodeURIComponent(JSON.stringify({ name: this.config.user.name }))}`;
+        }
+
+        if (this.config.user.id) {
+          url += `&senderId=${encodeURIComponent(this.config.user.id)}`;
+        }
       }
 
-      if (this._chatContext.gtmId != null) {
-        url += `&gtmId=${encodeURIComponent(this._chatContext.gtmId)}`;
+      if (this._config.initConversation) {
+        url += `&userMessage=`;
       }
 
-      if (this._chatContext.context != null) {
-        url += `$context=${encodeURIComponent(JSON.stringify(this._chatContext.context))}`;
+      if (this._config.gtmId != null) {
+        url += `&gtmId=${encodeURIComponent(this._config.gtmId)}`;
       }
 
-      if (this._chatContext.senderId != null) {
-        url += `$senderId=${encodeURIComponent(this._chatContext.senderId)}`;
+      if (this._config.sessionContext != null) {
+        url += `$context=${encodeURIComponent(JSON.stringify(this._config.sessionContext))}`;
       }
-
-      this.webchatContext.set('url', url);
+      console.log(url);
+      this.webChatConfig.set('url', url);
     } else {
-      this.webchatContext.set('url', '');
+      this.webChatConfig.set('url', '');
     }
   }
 }

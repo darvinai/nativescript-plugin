@@ -1,1 +1,1 @@
-export { NativeChat, INativeChatContext } from './nativechat';
+export { NativeChat, NativeChatConfig } from './nativechat';

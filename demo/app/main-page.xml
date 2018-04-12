@@ -1,5 +1,5 @@
 <Page
     xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
     xmlns:ui="ns-nativechat">
-    <ui:NativeChat chatContext="{{ nativeChatContext }}"/>
+    <ui:NativeChat config="{{ nativeChatConfig }}"/>
 </Page>
