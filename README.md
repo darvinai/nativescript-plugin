@@ -9,7 +9,7 @@ Follow the [instructions]() in our documentation to enable a mobile channel for 
 Run the following command from the root of your project:
 
 ```
-tns plugin add ns-nativechat
+tns plugin add @progress-nativechat/nativescript-nativechat
 ```
 
 ## Usage

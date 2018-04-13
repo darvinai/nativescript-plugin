@@ -1,6 +1,6 @@
 {
-    "name": "ns-nativechat",
-    "version": "1.0.1",
+    "name": "@progress-nativechat/nativescript-nativechat",
+    "version": "1.0.0",
     "description": "NativeChat plugin for NativeScript",
     "main": "nativechat",
     "typings": "index.d.ts",
@@ -34,7 +34,7 @@
         "iOS"
     ],
     "author": {
-        "name": "Darvin.ai"
+        "name": "Progress NativeChat"
     },
     "bugs": {
         "url": "https://github.com/darvinai/nativescript-plugin/issues"
@@ -51,6 +51,5 @@
         "tslint": "^5.0.0",
         "semver": "^5.5.0"
     },
-    "dependencies": {},
-    "bootstrapper": "nativescript-plugin-seed"
+    "dependencies": {}
 }
