@@ -6,4 +6,5 @@ if (global.TNS_WEBPACK) {
     // This will register each `page` postfixed xml, css, js, ts, scss etc. in the app/ folder
     const context = require.context("~/", true, /(page|fragment)\.(xml|css|js|ts|scss|less|sass)$/);
     global.registerWebpackModules(context);
+    global.registerModule('@progress-nativechat/nativescript-nativechat',() => require('@progress-nativechat/nativescript-nativechat'));
 }
