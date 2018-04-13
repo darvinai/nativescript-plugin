@@ -98,7 +98,7 @@ export class NativeChat extends GridLayout {
         }
 
         if (this._config.session.clear || this._config.session.userMessage) {
-          url += `&userMessage=${this._config.session.userMessage || ''}`;
+          url += `&userMessage=${encodeURIComponent(this._config.session.userMessage || '')}`;
         }
       }
 
