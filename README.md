@@ -79,7 +79,6 @@ In xml:
 ```
 ```typescript
 import { EventData, fromObject } from 'tns-core-modules/data/observable';
-import { NativeChat } from '@progress-nativechat/nativescript-nativechat';
 import { Page } from 'tns-core-modules/ui/page';
 
 
