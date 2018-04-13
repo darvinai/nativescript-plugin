@@ -17,7 +17,7 @@ tns plugin add @progress-nativechat/nativescript-nativechat
 ### JavaSdript
 
 ```javascript
-var NativeChatPlugin = require('ns-nativechat');
+var NativeChatPlugin = require('@progress-nativechat/nativescript-nativechat');
 var nativeChat = new NativeChatPlugin.NativeChat();
 
 nativeChat.config = {
@@ -43,7 +43,7 @@ In code:
 
 ```typescript
 import { EventData } from 'tns-core-modules/data/observable';
-import { NativeChat } from 'ns-nativechat';
+import { NativeChat } from '@progress-nativechat/nativescript-nativechat';
 import { Page } from 'tns-core-modules/ui/page';
 
 export function pageLoaded(args: EventData) {
@@ -73,13 +73,13 @@ In xml:
 ```xml
 <Page
     xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
-    xmlns:ui="ns-nativechat">
-    <ui:NativeChat config="{{ nativeChatConfig }}"/>
+    xmlns:nativechat="@progress-nativechat/nativescript-nativechat">
+    <nativechat:NativeChat config="{{ nativeChatConfig }}"/>
 </Page>
 ```
 ```typescript
 import { EventData, fromObject } from 'tns-core-modules/data/observable';
-import { NativeChat } from 'ns-nativechat';
+import { NativeChat } from '@progress-nativechat/nativescript-nativechat';
 import { Page } from 'tns-core-modules/ui/page';
 
 

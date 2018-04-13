@@ -1,8 +1,2 @@
-var Nativechat = require("ns-nativechat").Nativechat;
-var nativechat = new Nativechat();
-
-describe("greet function", function() {
-    it("exists", function() {
-        expect(nativechat.greet).toBeDefined();
-    });
-});
+var NativeChat = require("@progress-nativechat/nativescript-nativechat").NativeChat;
+var nativechat = new NativeChat();
