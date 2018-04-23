@@ -5,7 +5,8 @@ PACK_DIR=package;
 publish() {
     cd $PACK_DIR
     echo 'Publishing to npm...'
-    npm publish *.tgz
+    npm publish *.tgz --access public
 }
 
-./pack.sh && publish
+sudo sh ./pack.sh
+publish
