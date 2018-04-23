@@ -1,5 +1,5 @@
 {
-  "name": "nativescript-nativechat",
+  "name": "@progress-nativechat/nativescript-nativechat",
   "version": "1.0.0",
   "description": "NativeChat plugin for NativeScript",
   "main": "nativechat",
