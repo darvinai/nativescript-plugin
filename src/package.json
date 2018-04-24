@@ -1,6 +1,6 @@
 {
   "name": "@progress-nativechat/nativescript-nativechat",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "NativeChat plugin for NativeScript",
   "main": "nativechat",
   "typings": "index.d.ts",
