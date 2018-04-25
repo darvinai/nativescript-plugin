@@ -14,7 +14,7 @@ tns plugin add @progress-nativechat/nativescript-nativechat
 
 ## Usage
 
-### JavaSdript
+### JavaScript
 
 ```javascript
 var NativeChatPlugin = require('@progress-nativechat/nativescript-nativechat');
