@@ -8,5 +8,5 @@ publish() {
     npm publish *.tgz --access public
 }
 
-sudo sh ./pack.sh
+# sh ./pack.sh
 publish
