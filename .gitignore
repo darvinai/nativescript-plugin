@@ -17,6 +17,7 @@ demo/*.d.ts
 !demo/references.d.ts
 demo/lib
 demo/platforms
+demo-angular/platforms
 node_modules
 publish/src
 publish/package
