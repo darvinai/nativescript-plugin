@@ -175,7 +175,7 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | channelToken | string | required | An unique token required to connect to the channel. |
 | user | [User](#user) | optional | Information about the user. |
 | session | [Session](#session) | optional | Information about the user session. |
-| gtmId | string | optional | Google Tag Manager ID. Used in combination with the tracking property to track completed conversations. Check [here](https://docs.darvin.ai/docs/1.0/publishing/web/#gtmid-optional) for more information.|
+| gtmId | string | optional | Google Tag Manager ID. Used in combination with the tracking property to track completed conversations. Check [here](https://docs.nativechat.com/docs/1.0/publishing/web/#gtmid-optional) for more information.|
 
 
 #### User

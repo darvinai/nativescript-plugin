@@ -4,7 +4,7 @@ import { isAndroid } from "tns-core-modules/platform"
 import { Observable, fromObject, EventData } from 'tns-core-modules/data/observable/observable';
 
 const builder = require('tns-core-modules/ui/builder');
-const webchatUrl = 'https://webchat.darvin.ai/v1';
+const webchatUrl = 'https://webchat.nativechat.com/v1';
 
 export interface NativeChatConfig {
   botId: string;
@@ -79,12 +79,12 @@ export class NativeChat extends GridLayout {
       url += `&token=${encodeURIComponent(this._config.channelToken)}`;
 
       if (this._config.user) {
-        if (this.config.user.name) {
-          url += `&user=${encodeURIComponent(JSON.stringify({ name: this.config.user.name }))}`;
+        if (this._config.user.name) {
+          url += `&user=${encodeURIComponent(JSON.stringify({ name: this._config.user.name }))}`;
         }
 
-        if (this.config.user.id) {
-          url += `&senderId=${encodeURIComponent(this.config.user.id)}`;
+        if (this._config.user.id) {
+          url += `&senderId=${encodeURIComponent(this._config.user.id)}`;
         }
       }
 
