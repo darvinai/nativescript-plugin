@@ -16,30 +16,103 @@ tns plugin add @progress-nativechat/nativescript-nativechat
 
 ### JavaScript
 
-```javascript
-var NativeChatPlugin = require('@progress-nativechat/nativescript-nativechat');
-var nativeChat = new NativeChatPlugin.NativeChat();
+#### How to add the plugin using XML and binding
 
-nativeChat.config = {
-    botId: '5acddd9715e7187c15f3fc28',
-    channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-    channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
-    user: {
-        name: 'John Smith'
-    },
-    session: {
-        clear: true,
-        context: {
-            company: 'Progress Software',
-            phone: '555 555 5555'
+```xml
+<Page loaded="pageLoaded" xmlns:nativechat="@progress-nativechat/nativescript-nativechat">
+    <nativechat:NativeChat config="{{ nativeChatConfig }}"/>
+</Page>
+```
+```javascript
+exports.pageLoaded = function (args) {
+    var page = args.object;
+    page.bindingContext = {
+        nativeChatConfig: {
+            botId: '5acddd9715e7187c15f3fc28',
+            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+            user: {
+                name: 'John Smith'
+            },
+            session: {
+                clear: true,
+                userMessage: 'Book a doctor',
+                context: {
+                    company: 'Progress Software',
+                    phone: '555 555 5555'
+                }
+            }
         }
     }
 };
 ```
 
+#### How to add the plugin directly through code
+
+```javascript
+var plugin = require('@progress-nativechat/nativescript-nativechat');
+
+exports.pageLoaded = function (args) {
+    var page = args.object;
+    var nativeChat = new plugin.NativeChat();
+
+    nativeChat.config = {
+        botId: '5acddd9715e7187c15f3fc28',
+        channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+        channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+        user: {
+            name: 'John Smith'
+        },
+        session: {
+            clear: true,
+            context: {
+                company: 'Progress Software',
+                phone: '555 555 5555'
+            }
+        }
+    };
+
+    page.content = nativeChat;
+};
+```
+
 ### TypeScript
 
-In code:
+#### How to add the plugin using XML and binding
+
+```xml
+<Page
+    xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
+    xmlns:nativechat="@progress-nativechat/nativescript-nativechat">
+    <nativechat:NativeChat config="{{ nativeChatConfig }}"/>
+</Page>
+```
+```typescript
+import { EventData, fromObject } from 'tns-core-modules/data/observable';
+import { Page } from 'tns-core-modules/ui/page';
+
+export function pageLoaded(args: EventData) {
+    (<Page>args.object).bindingContext = fromObject({
+        nativeChatConfig: {
+            botId: '5acddd9715e7187c15f3fc28',
+            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+            user: {
+                name: 'John Smith'
+            },
+            session: {
+                clear: true,
+                userMessage: 'Book a doctor',
+                context: {
+                    company: 'Progress Software',
+                    phone: '555 555 5555'
+                }
+            }
+        }
+    });
+}
+```
+#### How to add the plugin directly through code
 
 ```typescript
 import { EventData } from 'tns-core-modules/data/observable';
@@ -65,42 +138,6 @@ export function pageLoaded(args: EventData) {
             }
         }
     };
-}
-```
-
-In xml:
-
-```xml
-<Page
-    xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page"
-    xmlns:nativechat="@progress-nativechat/nativescript-nativechat">
-    <nativechat:NativeChat config="{{ nativeChatConfig }}"/>
-</Page>
-```
-```typescript
-import { EventData, fromObject } from 'tns-core-modules/data/observable';
-import { Page } from 'tns-core-modules/ui/page';
-
-
-export function pageLoaded(args: EventData) {
-    (<Page>args.object).bindingContext = fromObject({
-        nativeChatConfig: {
-            botId: '5acddd9715e7187c15f3fc28',
-            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
-            user: {
-                name: 'John Smith'
-            },
-            session: {
-                clear: true,
-                userMessage: 'Book a doctor',
-                context: {
-                    company: 'Progress Software',
-                    phone: '555 555 5555'
-                }
-            }
-        }
-    });
 }
 ```
 
