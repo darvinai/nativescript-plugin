@@ -1,1 +1,1 @@
-export { NativeChat, NativeChatConfig, Session, User } from './nativechat';
+export { NativeChat, NativeChatConfig, Session, User, IGeolocationActivity, IUploadFileActivity } from './nativechat';

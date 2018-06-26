@@ -3,9 +3,12 @@ import { WebView } from 'tns-core-modules/ui/web-view';
 import { isAndroid } from "tns-core-modules/platform"
 import { Observable, fromObject, EventData } from 'tns-core-modules/data/observable/observable';
 import * as application from 'tns-core-modules/application';
+import * as builder from 'tns-core-modules/ui/builder'
 
-const builder = require('tns-core-modules/ui/builder');
 const webchatUrl = 'https://webchat.nativechat.com/v1';
+
+const PERMISSION_GRANTED = android.content.pm.PackageManager.PERMISSION_GRANTED;
+const ACCESS_FINE_LOCATION = (android as any).Manifest.permission.ACCESS_FINE_LOCATION;
 
 export interface NativeChatConfig {
     botId: string;
@@ -27,46 +30,86 @@ export interface Session {
     userMessage?: string;
 }
 
-class CustomWebChromeClient extends android.webkit.WebChromeClient {
-    constructor() {
-        super();
-        return global.__native(this);
-    }
+export interface IUploadFileActivity {
+    uploadCallback: android.webkit.ValueCallback<android.net.Uri>;
+}
 
-    onGeolocationPermissionsShowPrompt(origin:string, callback: android.webkit.GeolocationPermissions.ICallback) {
-        callback.invoke(origin, true, false);
+export interface IGeolocationActivity {
+    geolocationCallback: android.webkit.GeolocationPermissions.ICallback;
+    geolocationOrigin: string;
+}
+
+class CustomWebChromeClient extends android.webkit.WebChromeClient {
+    onGeolocationPermissionsShowPrompt(origin: string, callback: android.webkit.GeolocationPermissions.ICallback) {
+        const context = application.android.currentContext;
+
+        context.geolocationCallback = null;
+        context.geolocationOrigin = null;
+
+        const fineLocationPermission = context.checkSelfPermission(ACCESS_FINE_LOCATION);
+        if (fineLocationPermission !== PERMISSION_GRANTED) {
+            context.geolocationCallback = callback;
+            context.geolocationOrigin = origin;
+            try {
+                context.requestPermissions([ACCESS_FINE_LOCATION], NativeChat.REQUEST_LOCATION_CODE);
+            } catch (e) {
+                context.geolocationCallback = null;
+                context.geolocationOrigin = null;
+                android.widget.Toast.makeText(context, 'Cannot request location permissions.', android.widget.Toast.LENGTH_LONG).show();
+            }
+        } else {
+            callback.invoke(origin, true, false);
+        }
     }
 
     onShowFileChooser(
         webview: android.webkit.WebView,
         filePathCallback: android.webkit.ValueCallback<android.net.Uri>,
         fileChooserParams
-    ) {
-        const activity = application.android.foregroundActivity;
+    ): boolean {
+        const context = application.android.currentContext;
 
-        if (activity.uploadCallback != null) {
-            activity.uploadCallback.onReceiveValue(null);
-            activity.uploadCallback = null;
+        if (context.uploadCallback != null) {
+            context.uploadCallback.onReceiveValue(null);
+            context.uploadCallback = null;
         }
 
-        activity.uploadCallback = filePathCallback;
+        context.uploadCallback = filePathCallback;
 
         try {
             const intent = fileChooserParams.createIntent();
             console.log(intent);
-            activity.startActivityForResult(intent, 100);
+            context.startActivityForResult(intent, NativeChat.SELECT_FILE_RESULT_CODE);
         } catch (e) {
-            activity.uploadCallback = null;
-            android.widget.Toast.makeText(activity, 'Cannot open file chooser', android.widget.Toast.LENGTH_LONG).show();
-            
+            context.uploadCallback = null;
+            android.widget.Toast.makeText(context, 'Cannot open file chooser', android.widget.Toast.LENGTH_LONG).show();
+
             return false;
         }
-        
+
         return true;
+    }
+
+    shouldOverrideUrlLoading(webview: android.webkit.WebView, url: string): boolean {
+        if (url !== null && (url.startsWith("http://") || url.startsWith("https://"))) {
+            const context = application.android.currentContext;
+
+            try {
+                context.startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)));
+                return true;
+            } catch (error) {
+                android.widget.Toast.makeText(context, 'Cannot open url', android.widget.Toast.LENGTH_LONG).show();
+            }
+        }
+
+        return false;
     }
 }
 
 export class NativeChat extends GridLayout {
+    public static SELECT_FILE_RESULT_CODE = 100;
+    public static REQUEST_LOCATION_CODE = 200;
+
     private _webView: WebView;
     private _config: NativeChatConfig;
 
@@ -106,7 +149,7 @@ export class NativeChat extends GridLayout {
             settings.setDomStorageEnabled(true);
             settings.setDisplayZoomControls(false);
             settings.setAppCacheEnabled(true);
-            settings.setDatabaseEnabled(true); 
+            settings.setDatabaseEnabled(true);
 
             webview.android.setWebChromeClient(new CustomWebChromeClient());
         }

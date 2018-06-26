@@ -1,13 +1,14 @@
 import { setActivityCallbacks, AndroidActivityCallbacks } from "tns-core-modules/ui/frame";
-
-
-const SELECT_FILE_RESULT_CODE = 100;
+import { NativeChat, IUploadFileActivity, IGeolocationActivity } from "@progress-nativechat/nativescript-nativechat";
 
 @JavaProxy("org.myApp.MainActivity")
-class Activity extends android.app.Activity {
+class Activity extends android.app.Activity implements IUploadFileActivity, IGeolocationActivity {
     private _callbacks: AndroidActivityCallbacks;
 
-    public uploadCallback;
+    public geolocationCallback: android.webkit.GeolocationPermissions.ICallback;
+    public geolocationOrigin: string;
+
+    public uploadCallback: android.webkit.ValueCallback<android.net.Uri>;
 
     protected onCreate(savedInstanceState: android.os.Bundle): void {
         if (!this._callbacks) {
@@ -40,11 +41,21 @@ class Activity extends android.app.Activity {
 
     public onRequestPermissionsResult(requestCode: number, permissions: Array<String>, grantResults: Array<number>): void {
         this._callbacks.onRequestPermissionsResult(this, requestCode, permissions, grantResults, undefined /*TODO: Enable if needed*/);
+
+        if (requestCode === NativeChat.REQUEST_LOCATION_CODE) {
+            if (grantResults.length > 0 && grantResults[0] === android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                if (this.geolocationCallback !== null && this.geolocationOrigin !== null) {
+                    this.geolocationCallback.invoke(this.geolocationOrigin, true, false);
+                    this.geolocationCallback = null;
+                    this.geolocationOrigin = null;
+                }
+            }
+        }
     }
 
     protected onActivityResult(requestCode: number, resultCode: number, data: android.content.Intent): void {
         this._callbacks.onActivityResult(this, requestCode, resultCode, data, super.onActivityResult);
-        if (requestCode === SELECT_FILE_RESULT_CODE) {
+        if (requestCode === NativeChat.SELECT_FILE_RESULT_CODE) {
             this.upload(resultCode, data);
         }
     }
@@ -58,7 +69,7 @@ class Activity extends android.app.Activity {
         if (resultCode == android.app.Activity.RESULT_OK) {
             if (data !== null) {
                 if (android.os.Build.VERSION.SDK_INT >= 21) {
-                    uri = Array.create(android.net.Uri, 1); 
+                    uri = Array.create(android.net.Uri, 1);
                     uri[0] = android.net.Uri.parse(data.getDataString());
                 } else {
                     uri = data.getData();
