@@ -34,18 +34,18 @@ export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
     ): boolean {
         const context = application.android.currentContext;
 
-        if (context.uploadCallback != null) {
-            context.uploadCallback.onReceiveValue(null);
-            context.uploadCallback = null;
+        if (context.uploadFileCallback != null) {
+            context.uploadFileCallback.onReceiveValue(null);
+            context.uploadFileCallback = null;
         }
 
-        context.uploadCallback = filePathCallback;
+        context.uploadFileCallback = filePathCallback;
 
         try {
             const intent = fileChooserParams.createIntent();
             context.startActivityForResult(intent, NativeChat.SELECT_FILE_RESULT_CODE);
         } catch (e) {
-            context.uploadCallback = null;
+            context.uploadFileCallback = null;
             android.widget.Toast.makeText(context, 'Cannot open file chooser', android.widget.Toast.LENGTH_LONG).show();
 
             return false;

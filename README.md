@@ -247,7 +247,7 @@ protected onActivityResult(requestCode: number, resultCode: number, data: androi
 }
 
 private upload(resultCode: number, data: android.content.Intent) {
-    if (this.uploadCallback === null) {
+    if (this.uploadFileCallback === null) {
         return;
     }
 
@@ -263,8 +263,8 @@ private upload(resultCode: number, data: android.content.Intent) {
         }
     }
 
-    this.uploadCallback.onReceiveValue(uri);
-    this.uploadCallback = null;
+    this.uploadFileCallback.onReceiveValue(uri);
+    this.uploadFileCallback = null;
 }
 ```
 

@@ -8,7 +8,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
     public geolocationCallback: android.webkit.GeolocationPermissions.ICallback;
     public geolocationOrigin: string;
 
-    public uploadCallback: android.webkit.ValueCallback<android.net.Uri>;
+    public uploadFileCallback: android.webkit.ValueCallback<android.net.Uri>;
 
     protected onCreate(savedInstanceState: android.os.Bundle): void {
         if (!this._callbacks) {
@@ -16,7 +16,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
         }
 
         this._callbacks.onCreate(this, savedInstanceState, super.onCreate);
-        this.uploadCallback = null;
+        this.uploadFileCallback = null;
     }
 
     protected onSaveInstanceState(outState: android.os.Bundle): void {
@@ -61,7 +61,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
     }
 
     private upload(resultCode: number, data: android.content.Intent) {
-        if (this.uploadCallback === null) {
+        if (this.uploadFileCallback === null) {
             return;
         }
 
@@ -77,7 +77,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
             }
         }
 
-        this.uploadCallback.onReceiveValue(uri);
-        this.uploadCallback = null;
+        this.uploadFileCallback.onReceiveValue(uri);
+        this.uploadFileCallback = null;
     }
 }
