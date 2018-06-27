@@ -43,7 +43,6 @@ export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
 
         try {
             const intent = fileChooserParams.createIntent();
-            console.log(intent);
             context.startActivityForResult(intent, NativeChat.SELECT_FILE_RESULT_CODE);
         } catch (e) {
             context.uploadCallback = null;
@@ -53,20 +52,5 @@ export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
         }
 
         return true;
-    }
-
-    shouldOverrideUrlLoading(webview: android.webkit.WebView, url: string): boolean {
-        if (url !== null && (url.startsWith("http://") || url.startsWith("https://"))) {
-            const context = application.android.currentContext;
-
-            try {
-                context.startActivity(new android.content.Intent(android.content.Intent.ACTION_VIEW, android.net.Uri.parse(url)));
-                return true;
-            } catch (error) {
-                android.widget.Toast.makeText(context, 'Cannot open url', android.widget.Toast.LENGTH_LONG).show();
-            }
-        }
-
-        return false;
     }
 }

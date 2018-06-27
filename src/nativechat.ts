@@ -2,13 +2,17 @@ import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { WebView } from 'tns-core-modules/ui/web-view';
 import { isAndroid } from "tns-core-modules/platform"
 import { Observable, fromObject, EventData } from 'tns-core-modules/data/observable/observable';
- import * as builder from 'tns-core-modules/ui/builder'
- 
+import * as builder from 'tns-core-modules/ui/builder'
+
 import { NativeChatConfig } from './models';
 import { NativeChatWebChromeClient } from './android/nativechat-web-chrome-client';
+import { NativeChatWebViewClient } from './android/nativechat-web-view-client';
 
-const webchatUrl = 'https://webchat.nativechat.com/v1';
- 
+export const Config = {
+    webchatUrl: 'webchat.nativechat.com',
+    webchatVersion: 'v1'
+};
+
 export class NativeChat extends GridLayout {
     public static SELECT_FILE_RESULT_CODE = 100;
     public static REQUEST_LOCATION_CODE = 200;
@@ -55,6 +59,7 @@ export class NativeChat extends GridLayout {
             settings.setDatabaseEnabled(true);
 
             webview.android.setWebChromeClient(new NativeChatWebChromeClient());
+            webview.android.setWebViewClient(new NativeChatWebViewClient());
         }
     }
 
@@ -64,7 +69,7 @@ export class NativeChat extends GridLayout {
 
     private updateUrl(): void {
         if (this._config && this._config.botId && this._config.channelId && this._config.channelToken) {
-            let url = `${webchatUrl}?botId=${encodeURIComponent(this._config.botId)}`;
+            let url = `https://${Config.webchatUrl}/${Config.webchatVersion}?botId=${encodeURIComponent(this._config.botId)}`;
             url += `&channelId=${encodeURIComponent(this._config.channelId)}`;
             url += `&token=${encodeURIComponent(this._config.channelToken)}`;
 
