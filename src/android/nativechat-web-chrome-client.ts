@@ -4,7 +4,7 @@ import { NativeChat } from '../nativechat';
 const PERMISSION_GRANTED = android.content.pm.PackageManager.PERMISSION_GRANTED;
 const ACCESS_FINE_LOCATION = (android as any).Manifest.permission.ACCESS_FINE_LOCATION;
 
-export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
+export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {    
     onGeolocationPermissionsShowPrompt(origin: string, callback: android.webkit.GeolocationPermissions.ICallback) {
         const context = application.android.currentContext;
         
@@ -16,7 +16,7 @@ export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
             context.geolocationCallback = callback;
             context.geolocationOrigin = origin;
             try {
-                context.requestPermissions([ACCESS_FINE_LOCATION], NativeChat.REQUEST_LOCATION_CODE);
+                context.requestPermissions([ACCESS_FINE_LOCATION], NativeChat.LOCATION_REQUEST_CODE);
             } catch (e) {
                 context.geolocationCallback = null;
                 context.geolocationOrigin = null;

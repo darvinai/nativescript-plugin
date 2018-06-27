@@ -1,6 +1,9 @@
 import { setActivityCallbacks, AndroidActivityCallbacks } from "tns-core-modules/ui/frame";
 import { NativeChat, IUploadFileActivity, IGeolocationActivity } from "@progress-nativechat/nativescript-nativechat";
 
+const ACCESS_FINE_LOCATION = (android as any).Manifest.permission.ACCESS_FINE_LOCATION;
+
+
 @JavaProxy("org.myApp.MainActivity")
 class Activity extends android.app.Activity implements IUploadFileActivity, IGeolocationActivity {
     private _callbacks: AndroidActivityCallbacks;
@@ -42,8 +45,9 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
     public onRequestPermissionsResult(requestCode: number, permissions: Array<String>, grantResults: Array<number>): void {
         this._callbacks.onRequestPermissionsResult(this, requestCode, permissions, grantResults, undefined /*TODO: Enable if needed*/);
 
-        if (requestCode === NativeChat.REQUEST_LOCATION_CODE) {
-            if (grantResults.length > 0 && grantResults[0] === android.content.pm.PackageManager.PERMISSION_GRANTED) {
+        if (requestCode === NativeChat.LOCATION_REQUEST_CODE) {
+            const index = permissions.indexOf(ACCESS_FINE_LOCATION);
+            if (index >= 0 && grantResults[index] === android.content.pm.PackageManager.PERMISSION_GRANTED) {
                 if (this.geolocationCallback !== null && this.geolocationOrigin !== null) {
                     this.geolocationCallback.invoke(this.geolocationOrigin, true, false);
                     this.geolocationCallback = null;

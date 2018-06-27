@@ -15,7 +15,7 @@ export const Config = {
 
 export class NativeChat extends GridLayout {
     public static SELECT_FILE_RESULT_CODE = 100;
-    public static REQUEST_LOCATION_CODE = 200;
+    public static LOCATION_REQUEST_CODE = 200;
 
     private _webView: WebView;
     private _config: NativeChatConfig;
@@ -55,8 +55,10 @@ export class NativeChat extends GridLayout {
             var settings = webview.android.getSettings();
             settings.setDomStorageEnabled(true);
             settings.setDisplayZoomControls(false);
+            settings.setBuiltInZoomControls(false);
             settings.setAppCacheEnabled(true);
             settings.setDatabaseEnabled(true);
+            settings.setJavaScriptEnabled(true);
 
             webview.android.setWebChromeClient(new NativeChatWebChromeClient());
             webview.android.setWebViewClient(new NativeChatWebViewClient());
