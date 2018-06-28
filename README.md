@@ -254,7 +254,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity {
 
     protected onActivityResult(requestCode: number, resultCode: number, data: android.content.Intent): void {
         this._callbacks.onActivityResult(this, requestCode, resultCode, data, super.onActivityResult);
-        if (requestCode === NativeChat.SELECT_FILE_RESULT_CODE) {
+        if (requestCode === NativeChat.platform.android.SELECT_FILE_RESULT_CODE) {
             this.upload(resultCode, data);
         }
     }
@@ -278,7 +278,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity {
 }
 ```
 
-The default value of `NativeChat.SELECT_FILE_RESULT_CODE` is `100`, but you can change it if there are collisions with another activity result code in your app.
+The default value of `NativeChat.platform.android.SELECT_FILE_RESULT_CODE` is `100`, but you can change it if there are collisions with another activity result code in your app.
 
 ### iOS: Location Picker
 

@@ -14,8 +14,12 @@ export const Config = {
 };
 
 export class NativeChat extends GridLayout {
-    public static SELECT_FILE_RESULT_CODE = 100;
-    public static LOCATION_REQUEST_CODE = 200;
+    public static platform = {
+        android: {
+            SELECT_FILE_RESULT_CODE: 100,
+            LOCATION_REQUEST_CODE: 200
+        }
+    };
 
     private _webView: WebView;
     private _config: NativeChatConfig;

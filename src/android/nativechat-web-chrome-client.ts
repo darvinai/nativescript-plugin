@@ -16,7 +16,7 @@ export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
             context.geolocationCallback = callback;
             context.geolocationOrigin = origin;
             try {
-                context.requestPermissions([ACCESS_FINE_LOCATION], NativeChat.LOCATION_REQUEST_CODE);
+                context.requestPermissions([ACCESS_FINE_LOCATION], NativeChat.platform.android.LOCATION_REQUEST_CODE);
             } catch (e) {
                 context.geolocationCallback = null;
                 context.geolocationOrigin = null;
@@ -43,7 +43,7 @@ export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
 
         try {
             const intent = fileChooserParams.createIntent();
-            context.startActivityForResult(intent, NativeChat.SELECT_FILE_RESULT_CODE);
+            context.startActivityForResult(intent, NativeChat.platform.android.SELECT_FILE_RESULT_CODE);
         } catch (e) {
             context.uploadFileCallback = null;
             android.widget.Toast.makeText(context, 'Cannot open file chooser', android.widget.Toast.LENGTH_LONG).show();

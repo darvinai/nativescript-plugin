@@ -45,7 +45,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
     public onRequestPermissionsResult(requestCode: number, permissions: Array<String>, grantResults: Array<number>): void {
         this._callbacks.onRequestPermissionsResult(this, requestCode, permissions, grantResults, undefined /*TODO: Enable if needed*/);
 
-        if (requestCode === NativeChat.LOCATION_REQUEST_CODE &&
+        if (requestCode === NativeChat.platform.android.LOCATION_REQUEST_CODE &&
             this.geolocationCallback && this.geolocationOrigin) {
 
             for (let index = 0; index < permissions.length; index++) {
@@ -64,7 +64,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
 
     protected onActivityResult(requestCode: number, resultCode: number, data: android.content.Intent): void {
         this._callbacks.onActivityResult(this, requestCode, resultCode, data, super.onActivityResult);
-        if (requestCode === NativeChat.SELECT_FILE_RESULT_CODE) {
+        if (requestCode === NativeChat.platform.android.SELECT_FILE_RESULT_CODE) {
             this.upload(resultCode, data);
         }
     }
