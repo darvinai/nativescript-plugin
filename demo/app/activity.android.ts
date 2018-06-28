@@ -45,13 +45,18 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
     public onRequestPermissionsResult(requestCode: number, permissions: Array<String>, grantResults: Array<number>): void {
         this._callbacks.onRequestPermissionsResult(this, requestCode, permissions, grantResults, undefined /*TODO: Enable if needed*/);
 
-        if (requestCode === NativeChat.LOCATION_REQUEST_CODE) {
-            const index = permissions.indexOf(ACCESS_FINE_LOCATION);
-            if (index >= 0 && grantResults[index] === android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                if (this.geolocationCallback !== null && this.geolocationOrigin !== null) {
-                    this.geolocationCallback.invoke(this.geolocationOrigin, true, false);
+        if (requestCode === NativeChat.LOCATION_REQUEST_CODE &&
+            this.geolocationCallback && this.geolocationOrigin) {
+                
+            for (let index = 0; index < permissions.length; index++) {
+                if (permissions[index] === ACCESS_FINE_LOCATION) {
+                    if (grantResults[index] === android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                        this.geolocationCallback.invoke(this.geolocationOrigin, true, true);
+                    }
+
                     this.geolocationCallback = null;
                     this.geolocationOrigin = null;
+                    break;
                 }
             }
         }

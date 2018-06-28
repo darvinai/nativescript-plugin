@@ -23,7 +23,7 @@ export class NativeChatWebChromeClient extends android.webkit.WebChromeClient {
                 android.widget.Toast.makeText(context, 'Cannot request location permissions.', android.widget.Toast.LENGTH_LONG).show();
             }
         } else {
-            callback.invoke(origin, true, false);
+            callback.invoke(origin, true, true);
         }
     }
 
