@@ -47,7 +47,7 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
 
         if (requestCode === NativeChat.LOCATION_REQUEST_CODE &&
             this.geolocationCallback && this.geolocationOrigin) {
-                
+
             for (let index = 0; index < permissions.length; index++) {
                 if (permissions[index] === ACCESS_FINE_LOCATION) {
                     if (grantResults[index] === android.content.pm.PackageManager.PERMISSION_GRANTED) {
@@ -70,20 +70,14 @@ class Activity extends android.app.Activity implements IUploadFileActivity, IGeo
     }
 
     private upload(resultCode: number, data: android.content.Intent) {
-        if (this.uploadFileCallback === null) {
+        if (!this.uploadFileCallback) {
             return;
         }
 
         let uri = null;
-        if (resultCode == android.app.Activity.RESULT_OK) {
-            if (data !== null) {
-                if (android.os.Build.VERSION.SDK_INT >= 21) {
-                    uri = Array.create(android.net.Uri, 1);
-                    uri[0] = android.net.Uri.parse(data.getDataString());
-                } else {
-                    uri = data.getData();
-                }
-            }
+        if (resultCode == android.app.Activity.RESULT_OK && data) {
+            uri = Array.create(android.net.Uri, 1);
+            uri[0] = android.net.Uri.parse(data.getDataString());
         }
 
         this.uploadFileCallback.onReceiveValue(uri);

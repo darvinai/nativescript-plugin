@@ -228,51 +228,61 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | context | object | optional | A JSON object containing entities to be merged with the conversation context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
 | userMessage | string | optional | Used to send a message on the user's behalf if the session is cleared. |
 
-## Enable Functionality
+## Enable Platform Functionality
 
 ### Android: File Picker
 
- [extend application activity](https://docs.nativescript.org/angular/core-concepts/android-runtime/advanced-topics/extend-application-activity#extending-activity)
-
-Add the following code to the *onActivityResult* method:
+You have to extend the application activity following [this](https://docs.nativescript.org/angular/core-concepts/android-runtime/advanced-topics/extend-application-activity#extending-activity) guide. Your activity should implement the *IUploadFileActivity* interface since the NativeChat plugin sets the `uploadFileCallback` activity property. Finally, add the following code to the *onActivityResult* method:
 
 ```typescript
-import { NativeChat } from "@progress-nativechat/nativescript-nativechat";
+import { NativeChat, IUploadFileActivity } from "@progress-nativechat/nativescript-nativechat";
+const ACCESS_FINE_LOCATION = (android as any).Manifest.permission.ACCESS_FINE_LOCATION;
 
-protected onActivityResult(requestCode: number, resultCode: number, data: android.content.Intent): void {
-    this._callbacks.onActivityResult(this, requestCode, resultCode, data, super.onActivityResult);
-    if (requestCode === NativeChat.SELECT_FILE_RESULT_CODE) {
-        this.upload(resultCode, data);
+@JavaProxy("org.myApp.MainActivity")
+class Activity extends android.app.Activity implements IUploadFileActivity {
+
+    public uploadFileCallback: android.webkit.ValueCallback<android.net.Uri>;
+
+    protected onCreate(savedInstanceState: android.os.Bundle): void {
+        if (!this._callbacks) {
+            setActivityCallbacks(this);
+        }
+
+        this._callbacks.onCreate(this, savedInstanceState, super.onCreate);
+        this.uploadFileCallback = null;
     }
-}
 
-private upload(resultCode: number, data: android.content.Intent) {
-    if (this.uploadFileCallback === null) {
-        return;
-    }
-
-    let uri = null;
-    if (resultCode == android.app.Activity.RESULT_OK) {
-        if (data !== null) {
-            if (android.os.Build.VERSION.SDK_INT >= 21) {
-                uri = Array.create(android.net.Uri, 1);
-                uri[0] = android.net.Uri.parse(data.getDataString());
-            } else {
-                uri = data.getData();
-            }
+    protected onActivityResult(requestCode: number, resultCode: number, data: android.content.Intent): void {
+        this._callbacks.onActivityResult(this, requestCode, resultCode, data, super.onActivityResult);
+        if (requestCode === NativeChat.SELECT_FILE_RESULT_CODE) {
+            this.upload(resultCode, data);
         }
     }
 
-    this.uploadFileCallback.onReceiveValue(uri);
-    this.uploadFileCallback = null;
+    private upload(resultCode: number, data: android.content.Intent) {
+        if (!this.uploadFileCallback) {
+            return;
+        }
+
+        let uri = null;
+        if (resultCode == android.app.Activity.RESULT_OK && data) {
+            uri = Array.create(android.net.Uri, 1);
+            uri[0] = android.net.Uri.parse(data.getDataString());
+        }
+
+        this.uploadFileCallback.onReceiveValue(uri);
+        this.uploadFileCallback = null;
+    }
+
+    // the rest of the activity methods...
 }
 ```
 
-### Android: Location Picker
+The default value of `NativeChat.SELECT_FILE_RESULT_CODE` is `100`, but you can change it if there are collisions with another activity result code in your app.
 
 ### iOS: Location Picker
 
-You have to requiest authorization from the user to use his location. Add *NSLocationWhenInUseUsageDescription* key in the *app/App_Resources/iOS/Info.plist* file.
+You have to request authorization from the user to use his location. Add *NSLocationWhenInUseUsageDescription* key in the *app/App_Resources/iOS/Info.plist* file.
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
