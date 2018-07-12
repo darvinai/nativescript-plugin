@@ -2,8 +2,8 @@ import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { WebView } from 'tns-core-modules/ui/web-view';
 import { isAndroid } from "tns-core-modules/platform"
 import { Observable, fromObject, EventData } from 'tns-core-modules/data/observable/observable';
+import { BindingOptions } from "tns-core-modules/ui/core/bindable";
 
-const builder = require('tns-core-modules/ui/builder');
 const webchatUrl = 'https://webchat.nativechat.com/v1';
 
 export interface NativeChatConfig {
@@ -52,8 +52,14 @@ export class NativeChat extends GridLayout {
   constructor() {
     super();
     this.webChatConfig = fromObject({ url: '' });
-    this._webView = builder.load(__dirname + '/nativechat.xml') as WebView;
-    this._webView.bindingContext = this.webChatConfig;
+    this._webView = new WebView();
+    const webViewBindingOptions: BindingOptions = {
+      sourceProperty: "url",
+      targetProperty: "src",
+      twoWay: false
+    };
+
+    this._webView.bind(webViewBindingOptions, this.webChatConfig);
     this._webView.on('loadFinished', this.webViewLoaded);
 
     this.addChild(this._webView);
