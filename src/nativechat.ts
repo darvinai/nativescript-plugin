@@ -4,7 +4,7 @@ import { isAndroid } from "tns-core-modules/platform"
 import { Observable, fromObject, EventData } from 'tns-core-modules/data/observable/observable';
 import { BindingOptions } from "tns-core-modules/ui/core/bindable";
 
-const webchatUrl = 'https://webchat.nativechat.com/v1';
+const webchatUrl = 'https://webchat.nativechat.com/v1/';
 
 export interface NativeChatConfig {
   botId: string;
