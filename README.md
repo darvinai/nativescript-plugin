@@ -162,21 +162,21 @@ export class AppModule { }
 Use the plugin in a component:
 
 ```typescript
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { NativeChatConfig } from "@progress-nativechat/nativescript-nativechat";
 
 @Component({
     selector: "ns-app",
     template: `
     <GridLayout class="page">
-        <NativeChat [config]="nativeChatConfig"></NativeChat>
+        <NativeChat [config]="nativeChatConfig" (loaded)="onLoaded()"></NativeChat>
     </GridLayout>`
 })
 
 export class AppComponent implements OnInit {
     nativeChatConfig: NativeChatConfig;
 
-    ngOnInit(): void {
+    onLoaded(): void {
         this.nativeChatConfig = {
             botId: '5acddd9715e7187c15f3fc28',
             channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
