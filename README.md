@@ -173,7 +173,7 @@ import { NativeChatConfig } from "@progress-nativechat/nativescript-nativechat";
     </GridLayout>`
 })
 
-export class AppComponent implements OnInit {
+export class AppComponent {
     nativeChatConfig: NativeChatConfig;
 
     onLoaded(): void {
