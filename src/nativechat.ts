@@ -1,6 +1,6 @@
 import { GridLayout } from 'tns-core-modules/ui/layouts/grid-layout';
 import { WebView } from 'tns-core-modules/ui/web-view';
-import { isAndroid } from "tns-core-modules/platform"
+import { isAndroid } from "tns-core-modules/platform";
 import { Observable, fromObject, EventData } from 'tns-core-modules/data/observable/observable';
 import { BindingOptions } from "tns-core-modules/ui/core/bindable";
 
@@ -66,7 +66,7 @@ export class NativeChat extends GridLayout {
   }
 
   private webViewLoaded(args) {
-    var webview: WebView = <WebView>args.object;
+    const webview: WebView = <WebView>args.object;
     if (isAndroid) {
       const settings = webview.android.getSettings();
       settings.setDomStorageEnabled(true);
