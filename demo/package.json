@@ -12,7 +12,7 @@
     "@progress-nativechat/nativescript-nativechat": "file:../src",
     "nativescript-theme-core": "^1.0.4",
     "nativescript-unit-test-runner": "^0.5.1",
-    "tns-core-modules": "~5.2.0"
+    "tns-core-modules": "^5.2.0"
   },
   "devDependencies": {
     "karma": "4.0.1",
