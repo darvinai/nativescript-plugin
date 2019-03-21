@@ -85,7 +85,7 @@ matrix:
       sudo: required
       jdk: oraclejdk8
       before_script:
-        - echo no | android create avd --force -n test -t android-28 -b x86
+        - echo no | android create avd --force -n test -t android-28
         - emulator -avd test -no-audio -no-window &
         - android-wait-for-emulator
       before_install:
