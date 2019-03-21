@@ -26,3 +26,4 @@ demo/report/report.html
 demo/report/stats.json
 *.metadata.json
 *.ngsummary.json
+*.tgz
