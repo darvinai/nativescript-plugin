@@ -65,7 +65,7 @@
     "semver": "^5.5.0",
     "tns-core-modules": "^5.2.0",
     "tns-platform-declarations": "^5.2.0",
-    "tslint": "^5.0.0",
+    "tslint": "^5.14.0",
     "typescript": "~3.1.1",
     "zone.js": "^0.8.26"
   }

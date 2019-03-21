@@ -35,7 +35,7 @@ matrix:
       jdk: oraclejdk8
       before_install: nvm install 8
       script:
-        - cd src && npm i && npm run tsc
+        - cd src && npm i && npm run build
         - cd ../demo && tns build android
     - os: osx
       env: 
@@ -46,7 +46,7 @@ matrix:
       node_js: "8"
       jdk: oraclejdk8
       script: 
-        - cd src && npm i && npm run tsc
+        - cd src && npm i && npm run build
         - cd ../demo && tns build ios
     - stage: "Test"
       env:

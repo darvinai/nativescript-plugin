@@ -19,7 +19,8 @@
     "karma-jasmine": "2.0.1",
     "karma-nativescript-launcher": "0.4.0",
     "nativescript-dev-typescript": "~0.8.0",
-    "nativescript-dev-webpack": "~0.20.0"
+    "nativescript-dev-webpack": "~0.20.0",
+    "tslint": "^5.14.0"
   },
   "scripts": {
     "build.plugin": "cd ../src && npm run build",
