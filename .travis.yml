@@ -79,7 +79,7 @@ matrix:
         - tns build ios --bundle --env.uglify --env.aot
     - stage: "Test"
       env:
-        - TestAndroid="28"
+        - TestAndroid="21"
       language: android
       os: linux
       sudo: required
