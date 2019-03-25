@@ -1,43 +1,47 @@
 {
-	"description": "NativeScript Application",
-	"license": "SEE LICENSE IN <your-license-filename>",
-	"readme": "NativeScript Application",
-	"repository": "<fill-your-repository-here>",
-	"nativescript": {
-		"id": "org.nativescript.demoangular",
-		"tns-android": {
-			"version": "4.1.3"
-		},
-		"tns-ios": {
-			"version": "4.1.1"
-		}
-	},
-	"dependencies": {
-		"@angular/common": "^6.0.5",
-		"@angular/compiler": "^6.0.5",
-		"@angular/core": "^6.0.5",
-		"@angular/forms": "^6.0.5",
-		"@angular/http": "^6.0.5",
-		"@angular/platform-browser": "^6.0.5",
-		"@angular/platform-browser-dynamic": "^6.0.5",
-		"@angular/router": "^6.0.5",
-		"@progress-nativechat/nativescript-nativechat": "file:../src",
-		"nativescript-angular": "~6.0.0",
-		"nativescript-theme-core": "~1.0.4",
-		"reflect-metadata": "~0.1.8",
-		"rxjs": "^6.2.1",
-		"tns-core-modules": "~4.1.0",
-		"zone.js": "~0.8.2"
-	},
-	"devDependencies": {
-		"babel-traverse": "6.4.5",
-		"babel-types": "6.4.5",
-		"babylon": "6.4.5",
-		"lazy": "1.0.11",
-		"nativescript-dev-typescript": "~0.7.1",
-		"typescript": "~2.7.2"
-	},
-	"scripts": {
-		"build.plugin": "cd ../src && npm run build"
-	}
+  "description": "NativeScript Application",
+  "license": "SEE LICENSE IN <your-license-filename>",
+  "readme": "NativeScript Application",
+  "repository": "<fill-your-repository-here>",
+  "nativescript": {
+    "id": "org.nativescript.demoangular",
+    "tns-android": {
+      "version": "4.1.3"
+    },
+    "tns-ios": {
+      "version": "4.1.1"
+    }
+  },
+  "dependencies": {
+    "@angular/common": "~7.2.0",
+    "@angular/compiler": "~7.2.0",
+    "@angular/core": "~7.2.0",
+    "@angular/forms": "~7.2.0",
+    "@angular/http": "~7.2.0",
+    "@angular/platform-browser": "~7.2.0",
+    "@angular/platform-browser-dynamic": "~7.2.0",
+    "@angular/router": "~7.2.0",
+    "@progress-nativechat/nativescript-nativechat": "file:../src/progress-nativechat-nativescript-nativechat-2.0.1.tgz",
+    "nativescript-angular": "~7.2.3",
+    "nativescript-theme-core": "~1.0.4",
+    "reflect-metadata": "~0.1.8",
+    "rxjs": "^6.3.3",
+    "tns-core-modules": "^5.2.0",
+    "zone.js": "^0.8.4"
+  },
+  "devDependencies": {
+    "@angular/compiler-cli": "~7.2.0",
+    "@ngtools/webpack": "~7.2.0",
+    "babel-traverse": "6.4.5",
+    "babel-types": "6.4.5",
+    "babylon": "6.4.5",
+    "lazy": "1.0.11",
+    "nativescript-dev-typescript": "~0.7.1",
+    "nativescript-dev-webpack": "^0.20.3",
+    "tslint": "^5.14.0",
+    "typescript": "~3.1.1"
+  },
+  "scripts": {
+    "build.plugin": "cd ../src && npm run build"
+  }
 }

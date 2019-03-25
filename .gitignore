@@ -4,6 +4,7 @@
 *.js
 *.js.map
 *.log
+package-lock.json
 src/*.d.ts
 !src/index.d.ts
 !src/references.d.ts
@@ -23,3 +24,6 @@ publish/src
 publish/package
 demo/report/report.html
 demo/report/stats.json
+*.metadata.json
+*.ngsummary.json
+*.tgz

@@ -22,5 +22,11 @@
     "exclude": [
         "node_modules"
     ],
-    "compileOnSave": false
+    "compileOnSave": false,
+    "angularCompilerOptions": {
+        "genDir": ".",
+        "skipMetadataEmit": false,
+        "skipTemplateCodegen": true,
+        "strictMetadataEmit": true
+      }
 }
