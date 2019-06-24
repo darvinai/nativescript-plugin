@@ -1,4 +1,5 @@
 # NativeChat plugin for NativeScript
+[![Build Status](https://travis-ci.org/darvinai/nativescript-plugin.svg?branch=master)](https://travis-ci.org/darvinai/nativescript-plugin/)
 
 ## Prerequisites / Requirements
 
