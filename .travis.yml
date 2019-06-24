@@ -7,6 +7,7 @@ matrix:
       script: 
         - cd src && npm run ci.tslint
         - cd ../demo && npm run ci.tslint
+        - cd ../demo-angular && npm run ci.tslint
     - stage: "WebPack and Build"
       os: osx
       env:
@@ -33,47 +34,24 @@ matrix:
         - tns build android --bundle --env.uglify --env.snapshot
     - language: android
       env: 
-        - BuildAndroid="28"
-        - Type="TypeScript"
-      os: linux
-      jdk: oraclejdk8
-      before_install: nvm install 8
-      script: 
-        - cd publish && sh pack.sh
-        - cd ../demo && npm i ../publish/package/*.tgz -s
-        - tns build android
-    - os: osx
-      env: 
-        - BuildiOS="12"
-        - Type="TypeScript"
-      osx_image: xcode10.0
-      language: node_js 
-      node_js: "8"
-      jdk: oraclejdk8
-      script: 
-        - cd publish && sh pack.sh
-        - cd ../demo && npm i ../publish/package/*.tgz -s
-        - tns build ios
-    - language: android
-      env: 
-        - BuildAndroid="28"
+        - WebpackAndroid="28"
         - Type="Angular"
       os: linux
       jdk: oraclejdk8
       before_install: nvm install 8
-      script: 
+      script:
         - cd publish && sh pack.sh
         - cd ../demo-angular && npm i ../publish/package/*.tgz -s
         - tns build android --bundle --env.uglify --env.snapshot --env.aot
     - os: osx
       env: 
-        - BuildiOS="12"
+        - WebpackiOS="12"
         - Type="Angular"
       osx_image: xcode10.0
       language: node_js 
       node_js: "8"
       jdk: oraclejdk8
-      script: 
+      script:
         - cd publish && sh pack.sh
         - cd ../demo-angular && npm i ../publish/package/*.tgz -s
         - tns build ios --bundle --env.uglify --env.aot
@@ -102,7 +80,7 @@ matrix:
       node_js: "8"
       jdk: oraclejdk8
       osx_image: xcode10.0
-      script: 
+      script:
         - cd publish && sh pack.sh
         - cd ../demo && npm i ../publish/package/*.tgz -s
         - tns build ios
