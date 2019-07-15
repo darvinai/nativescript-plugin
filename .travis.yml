@@ -15,7 +15,7 @@ matrix:
       before_script:
         - cd ../demo && tns platform add ios@next
       script: 
-        - cd publish && sh pack.sh
+        - cd ../publish && sh pack.sh
         - cd ../demo && npm i ../publish/package/*.tgz -s
         - tns build ios --bundle --env.uglify
     - os: osx
@@ -44,7 +44,7 @@ matrix:
       before_script:
         - cd ../demo && tns platform add android@next
       script:
-        - cd publish && sh pack.sh
+        - cd ../publish && sh pack.sh
         - cd ../demo && npm i ../publish/package/*.tgz -s
         - tns build android --bundle --env.uglify --env.snapshot
     - language: android
