@@ -17,6 +17,7 @@ matrix:
       language: node_js 
       node_js: "10"
       jdk: oraclejdk8
+      before_script: pod repo update
       script: 
         - cd publish && sh pack.sh
         - cd ../demo && npm i ../publish/package/*.tgz -s
@@ -53,6 +54,7 @@ matrix:
       language: node_js 
       node_js: "10"
       jdk: oraclejdk8
+      before_script: pod repo update
       script:
         - cd publish && sh pack.sh
         - cd ../demo-angular && npm i ../publish/package/*.tgz -s
