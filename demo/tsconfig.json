@@ -12,6 +12,9 @@
         ],
         "baseUrl": ".",
         "paths": {
+            "*": [
+                "./node_modules/*"
+            ],
             "~/*": [
                 "app/*"
             ]

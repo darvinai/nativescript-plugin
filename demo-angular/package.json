@@ -6,40 +6,39 @@
   "nativescript": {
     "id": "org.nativescript.demoangular",
     "tns-android": {
-      "version": "4.1.3"
+      "version": "6.0.0"
     },
     "tns-ios": {
-      "version": "4.1.1"
+      "version": "6.0.1"
     }
   },
   "dependencies": {
-    "@angular/common": "~7.2.0",
-    "@angular/compiler": "~7.2.0",
-    "@angular/core": "~7.2.0",
-    "@angular/forms": "~7.2.0",
-    "@angular/http": "~7.2.0",
-    "@angular/platform-browser": "~7.2.0",
-    "@angular/platform-browser-dynamic": "~7.2.0",
-    "@angular/router": "~7.2.0",
+    "@angular/common": "~8.0.0",
+    "@angular/compiler": "~8.0.0",
+    "@angular/core": "~8.0.0",
+    "@angular/forms": "~8.0.0",
+    "@angular/http": "8.0.0-beta.10",
+    "@angular/platform-browser": "~8.0.0",
+    "@angular/platform-browser-dynamic": "~8.0.0",
+    "@angular/router": "~8.0.0",
     "@progress-nativechat/nativescript-nativechat": "file:../src",
-    "nativescript-angular": "~7.2.3",
+    "nativescript-angular": "~8.0.0",
     "nativescript-theme-core": "~1.0.4",
     "reflect-metadata": "~0.1.8",
     "rxjs": "^6.3.3",
-    "tns-core-modules": "^5.2.0",
-    "zone.js": "^0.8.4"
+    "tns-core-modules": "^6.0.1",
+    "zone.js": "0.9.1"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "~7.2.0",
-    "@ngtools/webpack": "~7.2.0",
+    "@angular/compiler-cli": "~8.0.0",
+    "@ngtools/webpack": "~8.0.0",
     "babel-traverse": "6.4.5",
     "babel-types": "6.4.5",
     "babylon": "6.4.5",
     "lazy": "1.0.11",
-    "nativescript-dev-typescript": "~0.7.1",
-    "nativescript-dev-webpack": "^0.20.3",
+    "nativescript-dev-webpack": "^1.0.1",
     "tslint": "^5.14.0",
-    "typescript": "~3.1.1"
+    "typescript": "~3.4.5"
   },
   "scripts": {
     "build.plugin": "cd ../src && npm run build",
