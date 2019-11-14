@@ -4,6 +4,10 @@ import { isAndroid } from "tns-core-modules/platform";
 import { Observable, fromObject, EventData } from 'tns-core-modules/data/observable/observable';
 import { BindingOptions } from "tns-core-modules/ui/core/bindable";
 
+const NATIVECHAT_ID = "kcChatWindow";
+const NATIVECHAT_CONTAINER_ID = "chatbotContainer";
+const NATIVECHAT_VERSION = "1.31.0";
+
 export interface NativeChatConfig {
   bot: Bot;
   channel: Channel;
@@ -105,16 +109,12 @@ export class NativeChat extends GridLayout {
     const channelToken = channel && channel.token;
 
     if (botId && channelId && channelToken) {
-      const chatbotId = "kcChatWindow";
-      const containerId = "chatbotContainer";
-      const chatbotVersion = "1.31.0";
-
       const chatbotSettings = {
-          id: chatbotId,
+          id: NATIVECHAT_ID,
           origin: "",
           display: {
               mode: "inline",
-              containerId
+              containerId: NATIVECHAT_CONTAINER_ID
           },
           chat: config
       };
@@ -124,15 +124,15 @@ export class NativeChat extends GridLayout {
         <head>
             <meta charset="UTF-8">
             <title>Progress NativeChat</title>
-            <script src="https://web-chat.nativechat.com/${chatbotVersion}/sdk/nativechat.js"></script>
-            <link href="https://web-chat.nativechat.com/${chatbotVersion}/sdk/nativechat.css" rel="stylesheet" type="text/css">
+            <script src="https://web-chat.nativechat.com/${NATIVECHAT_VERSION}/sdk/nativechat.js"></script>
+            <link href="https://web-chat.nativechat.com/${NATIVECHAT_VERSION}/sdk/nativechat.css" rel="stylesheet" type="text/css">
             <style>
               html, body { height: 100%; margin: 0; padding: 0; }
-              #${containerId} { width: 100%; height: 100%; }
+              #${NATIVECHAT_CONTAINER_ID} { width: 100%; height: 100%; }
             </style>
         </head>
         <body>
-          <div id="${containerId}"></div>
+          <div id="${NATIVECHAT_CONTAINER_ID}"></div>
           <script>
             window.NativeChat.load(${JSON.stringify(chatbotSettings)});
           </script>
