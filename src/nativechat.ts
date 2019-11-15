@@ -19,7 +19,7 @@ export interface NativeChatConfig {
   submitLocationText?: string;
   defaultLocation?: Location;
   css?: string[];
-  showDebugConsole: boolean;
+  showDebugConsole?: boolean;
   chatServerInstance?: string;
 }
 
@@ -35,7 +35,7 @@ export interface Channel {
 }
 
 export interface User {
-  id: string;
+  id?: string;
   avatarUrl?: string;
   name?: string;
   token?: string;
