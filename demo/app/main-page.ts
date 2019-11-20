@@ -1,4 +1,4 @@
-import { EventData, fromObject, fromObjectRecursive } from 'tns-core-modules/data/observable';
+import { EventData, fromObjectRecursive } from 'tns-core-modules/data/observable';
 import { Page } from 'tns-core-modules/ui/page';
 
 
