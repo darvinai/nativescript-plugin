@@ -29,9 +29,13 @@ exports.pageLoaded = function (args) {
     var page = args.object;
     page.bindingContext = {
         nativeChatConfig: {
-            botId: '5acddd9715e7187c15f3fc28',
-            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+            bot: {
+                id: '5acddd9715e7187c15f3fc28'
+            },
+            channel: {
+                id: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+                token: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8'
+            },
             user: {
                 name: 'John Smith'
             },
@@ -58,9 +62,13 @@ exports.pageLoaded = function (args) {
     var nativeChat = new plugin.NativeChat();
 
     nativeChat.config = {
-        botId: '5acddd9715e7187c15f3fc28',
-        channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-        channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+        bot: {
+            id: '5acddd9715e7187c15f3fc28'
+        },
+        channel: {
+            id: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+            token: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8'
+        },
         user: {
             name: 'John Smith'
         },
@@ -95,9 +103,13 @@ import { Page } from 'tns-core-modules/ui/page';
 export function pageLoaded(args: EventData) {
     (<Page>args.object).bindingContext = fromObject({
         nativeChatConfig: {
-            botId: '5acddd9715e7187c15f3fc28',
-            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+            bot: {
+                id: '5acddd9715e7187c15f3fc28'
+            },
+            channel: {
+                id: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+                token: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8'
+            },
             user: {
                 name: 'John Smith'
             },
@@ -124,9 +136,13 @@ export function pageLoaded(args: EventData) {
     const chat = new NativeChat();
     (<Page>args.object).content = chat;
     chat.config = {
-        botId: '5acddd9715e7187c15f3fc28',
-        channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-        channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+        bot: {
+            id: '5acddd9715e7187c15f3fc28'
+        },
+        channel: {
+            id: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+            token: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8'
+        },
         user: {
             name: 'John Smith'
         },
@@ -179,9 +195,13 @@ export class AppComponent {
 
     onLoaded(): void {
         this.nativeChatConfig = {
-            botId: '5acddd9715e7187c15f3fc28',
-            channelId: 'f91f065c-4079-4fa9-8860-b893e2b81696',
-            channelToken: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8',
+            bot: {
+                id: '5acddd9715e7187c15f3fc28'
+            },
+            channel: {
+                id: 'f91f065c-4079-4fa9-8860-b893e2b81696',
+                token: '0570f9a5-6c0e-4b77-b06d-20ce6d5c56d8'
+            },
             user: {
                 name: 'John Smith'
             },
@@ -208,20 +228,39 @@ The *config* property should conform to the **NativeChatConfig** interface.
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
-| botId | string | required | The id of your chat bot. |
-| channelId | string | required | The channel id to connect to. |
-| channelToken | string | required | An unique token required to connect to the channel. |
+| bot | [Bot](#bot) | required | Configuration for the bot to connect to. |
+| channel | [Channel](#channel) | required | Configuration of the channel to connect to. |
 | user | [User](#user) | optional | Information about the user. |
 | session | [Session](#session) | optional | Information about the user session. |
-| gtmId | string | optional | Google Tag Manager ID. Used in combination with the tracking property to track completed conversations. Check [here](https://docs.nativechat.com/docs/1.0/publishing/web/#gtmid-optional) for more information.|
+| googleApiKey | string | optional | This is an API key from the Google Cloud Platform used to display [location picker](https://docs.nativechat.com/docs/1.0/cognitive-flow/reply-templates#location-picker) inside the webchat. |
+| locale | string | optional | Specify the major locale of the widget. Currently supported major locales: ‘en’, ‘ar’, ‘pt’, ‘de’, ‘es’, ‘fi’, ‘bg’, ‘it’. |
+| placeholder | string | optional | The placeholder text shown in message edit box. |
+| submitLocationText | string | optional | The submit button text used in location picker that can be popped from send message area of widget. |
+| defaultLocation | [Location](#location) | optional | Default location to center the [location picker](https://docs.nativechat.com/docs/1.0/cognitive-flow/reply-templates#location-picker) to in case the user declines the prompt to allow geolocation. |
+| css | string[] | optional | An array with urls with CSS file defining a custom theme. You can create a theme with [Kendo Theme Builder](https://themebuilder.telerik.com/kendo-react-ui). |
 
+#### Bot
+
+| Property | Type |  | Description |
+| --- | --- | --- | --- |
+| id | string | required | The id of your chatbot. |
+| name | string | optional | Name with that each bot message will be labelled in the chat. |
+| avatarUrl | string | optional | Url of the avatar of the bot. |
+
+#### Channel
+
+| Property | Type |  | Description |
+| --- | --- | --- | --- |
+| id | string | required | The channel id to connect to. |
+| token | string | required | An unique token required to connect to the channel. |
 
 #### User
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
-| name | string | optional | The name of the user. This should be a combination of the first and last name, e.g. John Smith. |
 | id | string | optional | The id of the user enables persistent conversations. A valid id value can be any combination of letters, numbers, hyphens, or underscores. |
+| name | string | optional | The name of the user. This should be a combination of the first and last name, e.g. John Smith. |
+| avatarUrl | string | optional | Url of the avatar of the user. |
 
 #### Session
 
@@ -230,6 +269,13 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | clear | boolean | optional | If *true*, the bot will start new conversation with the user. |
 | context | object | optional | A JSON object containing entities to be merged with the conversation context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
 | userMessage | string | optional | Used to send a message on the user's behalf if the session is cleared. |
+
+#### Location
+
+| Property | Type |  | Description |
+| --- | --- | --- | --- |
+| latitude | boolean | required | The latitude to center [location picker](https://docs.nativechat.com/docs/1.0/cognitive-flow/reply-templates#location-picker) to. |
+| longitude | object | required | The longitude to center [location picker](https://docs.nativechat.com/docs/1.0/cognitive-flow/reply-templates#location-picker) to. |
 
 ## License
 
