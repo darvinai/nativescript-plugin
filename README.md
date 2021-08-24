@@ -1,5 +1,17 @@
 # NativeChat plugin for NativeScript
-[![Build Status](https://travis-ci.org/darvinai/nativescript-plugin.svg?branch=master)](https://travis-ci.org/darvinai/nativescript-plugin/)
+
+>:no_entry: **@progress-nativechat/nativescript-nativechat** is now deprecated.
+
+You can still use the NativeChat Web widget inside your NativeScript app by following these instructions:
+1. Publish your NativeChat bot for web
+2. Copy the snippet for the desired configuration
+3. In your NativeScript app create a new HTML file
+4. Paste the NativeChat installation snippet inside the `<body>` tag of the new HTML file
+5. In a page in your NativeScript app add a **WebView** component with src path to the HTML file with the NativeChat installation snippet. e.g.:
+
+```
+<WebView src="~/home/chat.html"></WebView>
+```
 
 ## Prerequisites / Requirements
 
