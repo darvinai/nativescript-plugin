@@ -13,11 +13,13 @@ You can still use the NativeChat Web widget inside your NativeScript app by foll
 <WebView src="~/home/chat.html"></WebView>
 ```
 
-## Prerequisites / Requirements
+## Obsolete Instructions
+
+### Prerequisites / Requirements
 
 Follow the [instructions]() in our documentation to enable a mobile channel for your bot.
 
-## Installation
+### Installation
 
 Run the following command from the root of your project:
 
@@ -25,11 +27,11 @@ Run the following command from the root of your project:
 tns plugin add @progress-nativechat/nativescript-nativechat
 ```
 
-## Usage
+### Usage
 
-### JavaScript
+#### JavaScript
 
-#### How to add the plugin using XML and binding
+##### How to add the plugin using XML and binding
 
 ```xml
 <Page loaded="pageLoaded" xmlns:nativechat="@progress-nativechat/nativescript-nativechat">
@@ -64,7 +66,7 @@ exports.pageLoaded = function (args) {
 };
 ```
 
-#### How to add the plugin directly through code
+##### How to add the plugin directly through code
 
 ```javascript
 var plugin = require('@progress-nativechat/nativescript-nativechat');
@@ -97,9 +99,9 @@ exports.pageLoaded = function (args) {
 };
 ```
 
-### TypeScript
+#### TypeScript
 
-#### How to add the plugin using XML and binding
+##### How to add the plugin using XML and binding
 
 ```xml
 <Page
@@ -137,7 +139,7 @@ export function pageLoaded(args: EventData) {
     });
 }
 ```
-#### How to add the plugin directly through code
+##### How to add the plugin directly through code
 
 ```typescript
 import { EventData } from 'tns-core-modules/data/observable';
@@ -170,7 +172,7 @@ export function pageLoaded(args: EventData) {
 }
 ```
 
-### Angular
+#### Angular
 
 Import the NativeChatModule in the app module:
 
@@ -230,13 +232,13 @@ export class AppComponent {
 }
 ```
 
-## API
+### API
 
-### config
+#### config
 
 The *config* property should conform to the **NativeChatConfig** interface.
 
-#### NativeChatConfig
+##### NativeChatConfig
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
@@ -251,7 +253,7 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | defaultLocation | [Location](#location) | optional | Default location to center the [location picker](https://docs.nativechat.com/docs/1.0/cognitive-flow/reply-templates#location-picker) to in case the user declines the prompt to allow geolocation. |
 | css | string[] | optional | An array with urls with CSS file defining a custom theme. You can create a theme with [Kendo Theme Builder](https://themebuilder.telerik.com/kendo-react-ui). |
 
-#### Bot
+##### Bot
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
@@ -259,14 +261,14 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | name | string | optional | Name with that each bot message will be labelled in the chat. |
 | avatarUrl | string | optional | Url of the avatar of the bot. |
 
-#### Channel
+##### Channel
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
 | id | string | required | The channel id to connect to. |
 | token | string | required | An unique token required to connect to the channel. |
 
-#### User
+##### User
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
@@ -274,7 +276,7 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | name | string | optional | The name of the user. This should be a combination of the first and last name, e.g. John Smith. |
 | avatarUrl | string | optional | Url of the avatar of the user. |
 
-#### Session
+##### Session
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
@@ -282,7 +284,7 @@ The *config* property should conform to the **NativeChatConfig** interface.
 | context | object | optional | A JSON object containing entities to be merged with the conversation context. They can be used as any other entity within the cognitive flow. Be careful to not override other entities used in the cognitive flow. |
 | userMessage | string | optional | Used to send a message on the user's behalf if the session is cleared. |
 
-#### Location
+##### Location
 
 | Property | Type |  | Description |
 | --- | --- | --- | --- |
